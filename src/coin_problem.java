@@ -24,29 +24,6 @@ public class coin_problem {
         return T[n][amount] > amount ? -1 : T[n][amount];
     }
 
-    public static int change(int amount, int[] coins) {
-        int[][] dpTable = new int[coins.length + 1][amount + 1];
-
-        for (int i = 0; i <= coins.length; i++) {
-            dpTable[i][0] = 1; // 1 way to make change for 0
-        }
-        for (int j = 1; j <= amount; j++) {
-            // no way (0) to make change for amount greater than zero with 0 value coin
-            dpTable[0][j] = 0;
-        }
-
-        for (int i = 1; i <= coins.length; i++) {
-            for (int j = 1; j <= amount; j++) {
-                if (coins[i - 1] > j) {
-                    dpTable[i][j] = dpTable[i - 1][j];
-                } else {
-                    dpTable[i][j] = dpTable[i - 1][j] + dpTable[i][j - coins[i - 1]];
-                }
-            }
-        }
-        print_mat(dpTable);
-        return dpTable[coins.length][amount];
-    }
 
     private static void print_mat(int[][] t) {
         int n = t.length;
@@ -73,3 +50,4 @@ public class coin_problem {
         System.out.println("the second data is ="+sol);
     }
 }
+
